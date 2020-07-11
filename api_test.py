@@ -13,24 +13,23 @@ class APITest(unittest.TestCase):
     NEW_USER_ID=0
     
     #Get request to /user returns all the users
-    def test_1_get_all_tables(self):
+    def test_1_get_all_users(self):
         r = requests.get(APITest.USER_URL)
         self.assertEqual(r.status_code, 200)
 
     #post request to /user to add new user
-    def test_2_add_new_table(self):
+    def test_2_add_new_user(self):
         r = requests.post(APITest.USER_URL, json = APITest.NEW_USER)
         self.assertEqual(r.status_code, 200)
         APITest.NEW_USER_ID = json.loads(r.text)['id']
-        print(APITest.NEW_USER_ID)
 
     # #put request to user/id to update user
-    def test_4_update_existing_table(self):
+    def test_3_update_existing_user(self):
         r = requests.put(f'{APITest.USER_URL}/{APITest.NEW_USER_ID}', json = APITest.NEW_USER)
         self.assertEqual(r.status_code, 200)
 
     # #delete request to user/id to delete user
-    def test_8_delete_existing_table_setting(self):
+    def test_4_delete_existing_user(self):
         r = requests.delete(f'{APITest.USER_URL}/{APITest.NEW_USER_ID}')
         self.assertEqual(r.status_code, 200)
 
